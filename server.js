@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 app.get("/scrape", (req, res) => {
     axios
-        .get("https://blog.ycombinator.com/")
+        .get("https://fallout.fandom.com/wiki/Fallout_Wiki/")
         .then(response => {
             const $ = cheerio.load(response.data);
             $("div.post").each(function (i, element) {

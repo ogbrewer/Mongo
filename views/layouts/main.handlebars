@@ -1,22 +1,35 @@
-<h1>Get the latest news on the start up scene</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>New Articles</h2>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<a href="/scrape">Scrape new articles</a>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-{{#each articles}}
-    <hr />
-    <h3>{{this.title}}</h3>
-    <p>{{this.description}}</p>
-    <a href={{this.link}}>Go To Article</a>
-    <h5>Article comments</h5>
-    {{#each this.comments}}
-        <p>{{this.body}}</p>
-        <small>{{this.createdDate}}</small>
-    {{/each}}
-    <form action="/api/{{this._id}}/comment" method="POST">
-        <textarea name="body"></textarea>
-        <button type="submit">Submit Comment</button>
-    </form>
-    <hr />
-{{/each}}
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container">
+        {{{body}}}
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="/js/home.js"></script>
+</body>
+
+</html>
