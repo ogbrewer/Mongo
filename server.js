@@ -37,28 +37,47 @@ app.get("/", (req, res) => {
 });
 
 app.get("/scrape", (req, res) => {
-    axios
-        .get("https://fallout.fandom.com/wiki/Fallout_Wiki/")
-        .then(response => {
-            const $ = cheerio.load(response.data);
-            $("div.post").each(function (i, element) {
-                let title = $(element).find("h1").find("a").text();
-                let link = $(element).find("h1").find("a").attr("href");
-                let description = $(element).find("p").text();
-                let postObj = {
-                    title: title,
-                    link: link,
-                    description: description
-                };
-                db.Article
-                    .create(postObj)
-                    .then(dbArticle => console.log(dbArticle))
-                    .catch(err => console.log(err));
-            });
+    // Make a request via axios to grab the HTML body from the site of your choice
+    axios.get("https://cnnespanol.cnn.com/").then(response => {
+  
 
-            res.send("Scarped data from ycombinator");
-        });
-});
+            // Load the HTML into cheerio and save it to a variable
+            // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
+            const $ = cheerio.load(response.data);
+          
+            // An empty array to save the data that we'll scrape
+            const results = [];
+          
+            // With cheerio, find each p-tag with the "title" class
+            // (i: iterator. element: the current element)
+            $("div.news__data").each(function(i, element) {
+          
+              // Save the text of the element in a "title" variable
+              let title = $(element).find("h2.news__title").find("a").text();
+          
+              // In the currently selected element, look at its child elements (i.e., its a-tags),
+              // then save the values for any "href" attributes that the child elements may have
+              let link = $(element).find("h2.news__title").find("a").attr("href");
+              let description = $(element).find("div.news__excerpt").find("p").text();
+              let postObj = {
+                  title: title,
+                  link: link,
+                  description: description
+              };
+              // Save these results in an object that we'll push into the results array we defined earlier
+              results.push({
+                title: title,
+                link: link,
+                description: description
+              });
+            });
+          
+            // Log the results once you've looped through each of the elements found with cheerio
+            console.log(results);
+          });
+          });
+        // Log the results once you've looped through each of the elements found with cheerio
+    
 
 app.post("/api/:articleId/comment", (req, res) => {
     db.Comment
