@@ -69,9 +69,15 @@ app.get("/scrape", (req, res) => {
                 title: title,
                 link: link,
                 description: description
+
               });
+                db.Article
+                .create(postObj)
+                .then(dbArticle => console.log(dbArticle))
+                .catch(err => console.log(err));
             });
-          
+            res.send("scrape complete");
+
             // Log the results once you've looped through each of the elements found with cheerio
             console.log(results);
           });
@@ -88,5 +94,11 @@ app.post("/api/:articleId/comment", (req, res) => {
         .then(() => res.redirect("/"))
         .catch(err => res.json(err));
 });
+app.get("/delete/:commentid", (req, res)=>{
+
+    db.Comment.findOneAndDelete({_id:req.params.commentid}).then(function() {
+        res.redirect("/")
+    })
+})  
 
 app.listen(PORT, () => console.log(`App is on http://localhost:${PORT}`));

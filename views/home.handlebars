@@ -13,6 +13,7 @@
     {{#each this.comments}}
         <p>{{this.body}}</p>
         <small>{{this.createdDate}}</small>
+        <a href="/delete/{{this._id}}"><button class="commentDelete" >Delete Button</button></a>
     {{/each}}
     <form action="/api/{{this._id}}/comment" method="POST">
         <textarea name="body"></textarea>
