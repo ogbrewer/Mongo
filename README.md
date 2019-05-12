@@ -1,3 +1,3 @@
 # Mongo
 
-This is an app designed to scrape articles from the Fallout Wiki.
+This is an app designed to scrape articles from CNN Español.
